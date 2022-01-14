@@ -1,4 +1,4 @@
-import { createRouter, createWebHistroy } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
 import TutorDetail from "./pages/tutors/TutorDetail.vue";
 import TutorRegistration from "./pages/tutors/TutorRegistration.vue";
@@ -8,17 +8,19 @@ import RequestReceived from "./pages/requests/RequestsReceived.vue";
 import NotFound from "./pages/NotFound.vue";
 
 const router = createRouter({
-  history: createWebHistroy(),
+  history: createWebHistory(),
   routes: [
     { path: "/", redirect: "/tutors" },
     { path: "/tutors", component: Tutors },
     {
       path: "/tutors/:id",
       component: TutorDetail,
-      children: {
-        path: "contact",
-        component: ContactTutor,
-      } /* for /tutors/:id/contact */,
+      children: [
+        {
+          path: "contact" /* for /tutors/:id/contact */,
+          component: ContactTutor,
+        },
+      ],
     },
     { path: "/register", component: TutorRegistration },
     { path: "/requests", component: RequestReceived },
