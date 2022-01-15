@@ -15,6 +15,7 @@ const router = createRouter({
     {
       path: "/tutors/:id",
       component: TutorDetail,
+      props: true /* get the id in the child comp thru d route */,
       children: [
         {
           path: "contact" /* for /tutors/:id/contact */,

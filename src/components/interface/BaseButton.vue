@@ -40,8 +40,10 @@ a {
   border: 1px solid #3a0061;
   color: white;
   cursor: pointer;
-  border-radius: 30px;
+  border-radius: 20px;
   margin-right: 0.5rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
   display: inline-block;
 }
 
