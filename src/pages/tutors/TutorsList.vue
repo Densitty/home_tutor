@@ -1,5 +1,8 @@
 <template>
-  <section>FILTER</section>
+  <section>
+    <tutor-filter @change-text="setFilters"></tutor-filter>
+  </section>
+
   <section>
     <base-card>
       <div class="controls">
@@ -23,17 +26,50 @@
 </template>
 
 <script>
+import TutorFilter from "../../components/tutors/TutorFilter.vue";
 import TutorItem from "../../components/tutors/TutorItem.vue";
 export default {
   components: {
     TutorItem,
+    TutorFilter,
+  },
+  data() {
+    return {
+      activeSearch: "",
+    };
+  },
+  methods: {
+    setFilters(searchText) {
+      // console.log("area is set");
+      this.activeSearch = searchText;
+    },
   },
   computed: {
     filteredTutors() {
-      return this.$store.getters[
-        /* tutors-> namespaced name/tutors ->getter title */
-        "tutors/tutors"
-      ];
+      const tutors =
+        this.$store.getters[
+          /* tutors-> namespaced name/tutors ->getter title */
+          "tutors/tutors"
+        ];
+
+      /* filter tutors based on their subject area(s) */
+      const myTutors = tutors.filter((tutor) => {
+        const search = tutor.areas.reduce((acc, area) => {
+          // console.log(this.activeSearch);
+          // return area.toLowerCase().includes(this.activeSearch.toLowerCase()); /* not working for searching 'desktop appreciation */
+
+          if (area.toLowerCase().includes(this.activeSearch.toLowerCase())) {
+            return true;
+          }
+
+          return acc;
+        }, false);
+
+        return search;
+      });
+      // console.log(myTutors);
+
+      return myTutors;
     },
     tutorsFound() {
       return this.$store.getters["tutors/tutorsPresent"];

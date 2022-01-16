@@ -33,7 +33,7 @@ export default {
   margin-bottom: 0.5rem;
 }
 
-.mathematics {
+/* .mathematics {
   background-color: #3d008d;
   color: white;
 }
@@ -46,5 +46,5 @@ export default {
 .french {
   background-color: #8d006e;
   color: white;
-}
+} */
 </style>
