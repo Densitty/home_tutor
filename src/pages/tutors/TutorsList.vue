@@ -7,7 +7,9 @@
     <base-card>
       <div class="controls">
         <base-button mode="outline">Refresh</base-button>
-        <base-button link to="/register">Register as Tutor</base-button>
+        <base-button link to="/register" v-if="!isTutorRegistered"
+          >Register as Tutor</base-button
+        >
       </div>
       <ul v-if="tutorsFound">
         <tutor-item
@@ -40,7 +42,6 @@ export default {
   },
   methods: {
     setFilters(searchText) {
-      // console.log("area is set");
       this.activeSearch = searchText;
     },
   },
@@ -61,7 +62,6 @@ export default {
           if (area.toLowerCase().includes(this.activeSearch.toLowerCase())) {
             return true;
           }
-
           return acc;
         }, false);
 
@@ -73,6 +73,10 @@ export default {
     },
     tutorsFound() {
       return this.$store.getters["tutors/tutorsPresent"];
+    },
+    isTutorRegistered() {
+      // console.log(this.$store.getters["tutors/isTutor"]);
+      return this.$store.getters["tutors/isTutor"];
     },
   },
 };
