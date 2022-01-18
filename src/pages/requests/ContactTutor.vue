@@ -67,12 +67,17 @@ export default {
         return;
       }
 
-      const formData = {
+      const requestData = {
+        tutorId: this.$route.params.id /* get tutorId from params */,
         email: this.email.value,
         message: this.message.value,
       };
 
-      console.log(formData);
+      // dispatch the message to the store through action
+      this.$store.dispatch("requests/messageTutorAction", requestData);
+
+      // navigate away from route
+      this.$router.replace("/tutors");
     },
   },
 };
