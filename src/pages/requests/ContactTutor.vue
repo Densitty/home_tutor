@@ -1,3 +1,123 @@
 <template>
-  <h3>Leave a Message</h3>
+  <form @submit.prevent="submitForm">
+    <div class="form-control">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        name="email"
+        id=""
+        v-model.trim="email.value"
+        @focus="clearValidityError('email')"
+      />
+    </div>
+    <div class="form-control">
+      <label for="message">Message</label>
+      <textarea
+        name=""
+        id="message"
+        cols="30"
+        rows="5"
+        v-model.trim="message.value"
+        @focus="clearValidityError('message')"
+      ></textarea>
+    </div>
+
+    <p v-if="!formIsValid" class="errors">
+      Please review your contact form and re-send again.
+    </p>
+
+    <div class="actions">
+      <base-button>Message Me</base-button>
+    </div>
+  </form>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      email: { value: "", isValid: true },
+      message: { value: "", isValid: true },
+      formIsValid: true,
+    };
+  },
+  methods: {
+    validateForm() {
+      this.formIsValid = true;
+
+      console.log(this.email.value);
+
+      if (this.email.value === "" || !this.email.value.includes("@")) {
+        this.email.isValid = false;
+        this.formIsValid = false;
+      }
+
+      if (this.message.value === "") {
+        this.email.isValid = false;
+        this.formIsValid = false;
+      }
+    },
+    clearValidityError(input) {
+      this[input].isValid = true;
+    },
+    submitForm() {
+      this.validateForm();
+
+      if (!this.formIsValid) {
+        return;
+      }
+
+      const formData = {
+        email: this.email.value,
+        message: this.message.value,
+      };
+
+      console.log(formData);
+    },
+  },
+};
+</script>
+
+<style scoped>
+form {
+  margin: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.form-control {
+  margin: 0.5rem 0;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  font: inherit;
+  border: 1px solid #ccc;
+  padding: 0.15rem;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #3d008d;
+  background-color: #faf6ff;
+  outline: none;
+}
+
+.errors {
+  font-weight: bold;
+  color: red;
+}
+
+.actions {
+  text-align: center;
+}
+</style>
