@@ -3,7 +3,7 @@ export default {
     return state.tutors;
   },
   tutorsPresent(state) {
-    return state.tutors && state.tutors.length > 1;
+    return state.tutors && state.tutors.length > 0;
   },
   isTutor(state, getters, rootState, rootGetters) {
     // get all tutors from the  tutors module
