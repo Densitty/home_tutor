@@ -34,4 +34,33 @@ export default {
       ...tutorData,
     });
   },
+  async loadTutorsAction(context) {
+    const response = await fetch(
+      `https://home-tutors-c608e-default-rtdb.europe-west1.firebasedatabase.app/tutors.json`
+    );
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      console.log("Error");
+    }
+
+    const tutors = [];
+
+    for (const key in responseData) {
+      const tutor = {
+        id: key,
+        firstName: responseData[key].firstName,
+        lastName: responseData[key].lastName,
+        description: responseData[key].description,
+        hourlyRate: responseData[key].hourlyRate,
+        areas: responseData[key].areas,
+      };
+
+      tutors.push(tutor);
+    }
+
+    // commit the data to store
+    context.commit("setTutors", tutors);
+  },
 };

@@ -6,12 +6,21 @@
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline">Refresh</base-button>
-        <base-button link to="/register" v-if="!isTutorRegistered"
-          >Register as Tutor</base-button
+        <base-button mode="outline" @click="loadTutors">Refresh</base-button>
+        <base-button
+          link
+          to="/register"
+          v-if="!isTutorRegistered && !isLoading"
         >
+          Register as Tutor
+        </base-button>
       </div>
-      <ul v-if="tutorsFound">
+
+      <div class="spinner-body" v-if="isLoading">
+        <base-spinner></base-spinner>
+      </div>
+
+      <ul v-else-if="tutorsFound">
         <tutor-item
           v-for="tutor in filteredTutors"
           :key="tutor.id"
@@ -30,6 +39,7 @@
 <script>
 import TutorFilter from "../../components/tutors/TutorFilter.vue";
 import TutorItem from "../../components/tutors/TutorItem.vue";
+
 export default {
   components: {
     TutorItem,
@@ -38,11 +48,21 @@ export default {
   data() {
     return {
       activeSearch: "",
+      isLoading: false,
     };
   },
   methods: {
     setFilters(searchText) {
       this.activeSearch = searchText;
+    },
+    async loadTutors() {
+      // while fetching/awaiting arrival of data
+      this.isLoading = true;
+      // reach out to the store to call the action
+      /* this.$store.dispatch(getter namespace/action") */
+      await this.$store.dispatch("tutors/loadTutorsAction");
+      // after data is fetched, reset the isLoading ppty
+      this.isLoading = false;
     },
   },
   computed: {
@@ -72,12 +92,15 @@ export default {
       return myTutors;
     },
     tutorsFound() {
-      return this.$store.getters["tutors/tutorsPresent"];
+      return !this.isLoading && this.$store.getters["tutors/tutorsPresent"];
     },
     isTutorRegistered() {
       // console.log(this.$store.getters["tutors/isTutor"]);
       return this.$store.getters["tutors/isTutor"];
     },
+  },
+  created() {
+    this.loadTutors();
   },
 };
 </script>
@@ -92,5 +115,13 @@ ul {
 .controls {
   display: flex;
   justify-content: space-between;
+}
+.spinner-body {
+  background: #3d008d;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
 }
 </style>
