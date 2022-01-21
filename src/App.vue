@@ -31,4 +31,13 @@ a {
   text-decoration: none;
   color: #a01e1e;
 }
+
+.spinner-body {
+  background: rgba(61, 0, 141, 0.6);
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+}
 </style>

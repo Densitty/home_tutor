@@ -25,7 +25,8 @@ export default {
     console.log(responseData);
 
     if (!response.ok) {
-      console.log("Error");
+      const error = new Error(responseData.message || "Failed to fetch");
+      throw error;
     }
 
     // commit the data to store

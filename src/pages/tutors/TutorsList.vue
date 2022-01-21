@@ -34,6 +34,13 @@
       <h3 v-else>No tutor found</h3>
     </base-card>
   </section>
+  <base-dialog
+    :show="!!error"
+    title="Oops! An Error Occured"
+    @close="handleError"
+  >
+    <p>{{ error }}</p>
+  </base-dialog>
 </template>
 
 <script>
@@ -49,6 +56,7 @@ export default {
     return {
       activeSearch: "",
       isLoading: false,
+      error: null,
     };
   },
   methods: {
@@ -58,11 +66,18 @@ export default {
     async loadTutors() {
       // while fetching/awaiting arrival of data
       this.isLoading = true;
-      // reach out to the store to call the action
-      /* this.$store.dispatch(getter namespace/action") */
-      await this.$store.dispatch("tutors/loadTutorsAction");
+      try {
+        // reach out to the store to call the action
+        /* this.$store.dispatch(getter namespace/action") */
+        await this.$store.dispatch("tutors/loadTutorsAction");
+      } catch (err) {
+        this.error = err.message || "Something went wrong. Retry again.";
+      }
       // after data is fetched, reset the isLoading ppty
       this.isLoading = false;
+    },
+    handleError() {
+      this.error = null;
     },
   },
   computed: {
