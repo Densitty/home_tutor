@@ -1,46 +1,49 @@
 <template>
-  <section>
-    <tutor-filter @change-text="setFilters"></tutor-filter>
-  </section>
+  <div>
+    <section>
+      <tutor-filter @change-text="setFilters"></tutor-filter>
+    </section>
 
-  <section>
-    <base-card>
-      <div class="controls">
-        <base-button mode="outline" @click="loadTutors">Refresh</base-button>
-        <base-button
-          link
-          to="/register"
-          v-if="!isTutorRegistered && !isLoading"
-        >
-          Register as Tutor
-        </base-button>
-      </div>
+    <section>
+      <base-card>
+        <div class="controls">
+          <base-button mode="outline" @click="loadTutors">Refresh</base-button>
+          <base-button
+            link
+            to="/register"
+            v-if="!isTutorRegistered && !isLoading"
+          >
+            Register as Tutor
+          </base-button>
+        </div>
 
-      <div class="spinner-body" v-if="isLoading">
-        <base-spinner></base-spinner>
-      </div>
+        <div class="spinner-body" v-if="isLoading">
+          <base-spinner></base-spinner>
+        </div>
 
-      <ul v-else-if="tutorsFound">
-        <tutor-item
-          v-for="tutor in filteredTutors"
-          :key="tutor.id"
-          :id="tutor.id"
-          :first-name="tutor.firstName"
-          :last-name="tutor.lastName"
-          :rate="tutor.hourlyRate"
-          :areas="tutor.areas"
-        ></tutor-item>
-      </ul>
-      <h3 v-else>No tutor found</h3>
-    </base-card>
-  </section>
-  <base-dialog
-    :show="!!error"
-    title="Oops! An Error Occured"
-    @close="handleError"
-  >
-    <p>{{ error }}</p>
-  </base-dialog>
+        <ul v-else-if="tutorsFound">
+          <tutor-item
+            v-for="tutor in filteredTutors"
+            :key="tutor.id"
+            :id="tutor.id"
+            :first-name="tutor.firstName"
+            :last-name="tutor.lastName"
+            :rate="tutor.hourlyRate"
+            :areas="tutor.areas"
+          ></tutor-item>
+        </ul>
+        <h3 v-else>No tutor found</h3>
+      </base-card>
+    </section>
+
+    <base-dialog
+      :show="!!error"
+      title="Oops! An Error Occured"
+      @close="handleError"
+    >
+      <p>{{ error }}</p>
+    </base-dialog>
+  </div>
 </template>
 
 <script>
@@ -91,7 +94,6 @@ export default {
       /* filter tutors based on their subject area(s) */
       const myTutors = tutors.filter((tutor) => {
         const search = tutor.areas.reduce((acc, area) => {
-          // console.log(this.activeSearch);
           // return area.toLowerCase().includes(this.activeSearch.toLowerCase()); /* not working for searching 'desktop appreciation */
 
           if (area.toLowerCase().includes(this.activeSearch.toLowerCase())) {
