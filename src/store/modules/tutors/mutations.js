@@ -6,4 +6,7 @@ export default {
     // console.log(payload);
     state.tutors = payload;
   },
+  setFetchTimestamp(state) {
+    state.lastFetchFromServer = new Date().getTime();
+  },
 };

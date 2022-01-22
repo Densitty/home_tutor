@@ -6,6 +6,7 @@ export default {
   namespaced: true,
   state() {
     return {
+      lastFetchFromServer: null,
       tutors: [
         {
           id: "181",

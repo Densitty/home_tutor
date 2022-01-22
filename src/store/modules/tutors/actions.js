@@ -36,6 +36,10 @@ export default {
     });
   },
   async loadTutorsAction(context) {
+    if (!context.getters.shouldThereBeFetch) {
+      return;
+    }
+
     const response = await fetch(
       `https://home-tutors-c608e-default-rtdb.europe-west1.firebasedatabase.app/tutors.json`
     );
@@ -63,5 +67,7 @@ export default {
 
     // commit the data to store
     context.commit("setTutors", tutors);
+
+    context.commit("setFetchTimestamp");
   },
 };
