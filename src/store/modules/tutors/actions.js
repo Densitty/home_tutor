@@ -11,10 +11,11 @@ export default {
       areas: data.areas,
     };
 
+    const token = context.rootGetters.token;
     // send request to the db (firebase backend)
     /* using put request against post when registering as a tutor b/c tutorId is gotten from db and stored in state */
     const response = await fetch(
-      `https://home-tutors-c608e-default-rtdb.europe-west1.firebasedatabase.app/tutors/${tutorId}/.json`,
+      `https://home-tutors-c608e-default-rtdb.europe-west1.firebasedatabase.app/tutors/${tutorId}/.json?auth=${token}`,
       {
         method: "PUT",
         body: JSON.stringify(tutorData),

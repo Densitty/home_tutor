@@ -18,6 +18,7 @@ export default {};
   position: relative;
   animation: anim1 2s linear infinite;
 }
+
 .loading::before,
 .loading::after {
   content: "";

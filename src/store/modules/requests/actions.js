@@ -45,8 +45,9 @@ export default {
   async fetchRequestsAction(context) {
     // console.log(context);
     const tutorId = context.rootGetters.userID;
+    const token = context.rootGetters.token;
     const response = await fetch(
-      `https://home-tutors-c608e-default-rtdb.europe-west1.firebasedatabase.app/requests/${tutorId}.json`
+      `https://home-tutors-c608e-default-rtdb.europe-west1.firebasedatabase.app/requests/${tutorId}.json?auth=${token}`
     );
 
     const responseData = await response.json();

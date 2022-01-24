@@ -69,5 +69,7 @@ a {
 }
 
 .route-leave-to {
+  opacity: 1;
+  transform: translateY(30px);
 }
 </style>

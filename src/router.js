@@ -5,6 +5,7 @@ import TutorRegistration from "./pages/tutors/TutorRegistration.vue";
 import Tutors from "./pages/tutors/TutorsList.vue";
 import ContactTutor from "./pages/requests/ContactTutor.vue";
 import RequestReceived from "./pages/requests/RequestsReceived.vue";
+import UserAuth from "./pages/auth/UserAuth.vue";
 import NotFound from "./pages/NotFound.vue";
 
 const router = createRouter({
@@ -25,6 +26,7 @@ const router = createRouter({
     },
     { path: "/register", component: TutorRegistration },
     { path: "/requests", component: RequestReceived },
+    { path: "/auth", component: UserAuth },
     { path: "/:notFound(.*)", component: NotFound },
   ],
 });
