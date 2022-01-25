@@ -8,10 +8,12 @@
       <base-card>
         <div class="controls">
           <base-button mode="outline" @click="loadTutors">Refresh</base-button>
+
+          <base-button v-if="!isLoggedIn" link to="/auth">Login</base-button>
           <base-button
             link
             to="/register"
-            v-if="!isTutorRegistered && !isLoading"
+            v-if="isLoggedIn && !isTutorRegistered && !isLoading"
           >
             Register as Tutor
           </base-button>
@@ -114,6 +116,9 @@ export default {
     isTutorRegistered() {
       // console.log(this.$store.getters["tutors/isTutor"]);
       return this.$store.getters["tutors/isTutor"];
+    },
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
     },
   },
   created() {
