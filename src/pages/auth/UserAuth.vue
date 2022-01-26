@@ -93,7 +93,7 @@ export default {
           await this.$store.dispatch("signupAction", payloadData);
         }
         // reidrect to homepage or to register as coach page if logged in
-        const redirectUrl = `/${this.$route.query.redirect || "/"}`;
+        const redirectUrl = `/${this.$route.query.redirect || ""}`;
         this.$router.replace(redirectUrl);
       } catch (err) {
         console.log(err.message);

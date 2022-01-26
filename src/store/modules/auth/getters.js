@@ -9,4 +9,7 @@ export default {
     /* convert token, a string value, into a boolean */
     return !!state.token;
   },
+  didAutoLogout(state) {
+    return state.didAutoLogout;
+  },
 };
