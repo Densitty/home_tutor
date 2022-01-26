@@ -88,6 +88,43 @@
         />
         <label for="french">French</label>
       </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name=""
+          id="physics"
+          value="physics"
+          v-model="areas.value"
+          @focus="clearValidityError('areas')"
+        />
+        <label for="physics">Physics</label>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name=""
+          id="chemistry"
+          value="chemistry"
+          v-model="areas.value"
+          @focus="clearValidityError('areas')"
+        />
+        <label for="chemistry">Chemistry</label>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name=""
+          id="biology"
+          value="biology"
+          v-model="areas.value"
+          @focus="clearValidityError('areas')"
+        />
+        <label for="biology">Biology</label>
+      </div>
+
       <p v-if="!areas.isValid">
         Please choose one or more areas of specialization
       </p>

@@ -57,8 +57,8 @@ export default {
     // console.log(responseData);
 
     // add the time the token will expire
-    // const expiresIn = parseInt(responseData.expiresIn) * 1000;
-    const expiresIn = 5000;
+    const expiresIn = parseInt(responseData.expiresIn) * 1000;
+    // const expiresIn = 5000;
     const expirationTime = new Date().getTime() + expiresIn;
     // store authenticated user data in local storage
     localStorage.setItem("token", responseData.idToken);
