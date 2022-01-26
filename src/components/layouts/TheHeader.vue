@@ -35,6 +35,8 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch("logoutAction");
+      // redirect to homepage after logout
+      this.$router.replace("/");
     },
   },
 };

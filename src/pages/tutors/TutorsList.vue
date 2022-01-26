@@ -9,7 +9,10 @@
         <div class="controls">
           <base-button mode="outline" @click="loadTutors">Refresh</base-button>
 
-          <base-button v-if="!isLoggedIn" link to="/auth">Login</base-button>
+          <base-button v-if="!isLoggedIn" link to="/auth?redirect=register">
+            Register as Tutor
+          </base-button>
+
           <base-button
             link
             to="/register"
