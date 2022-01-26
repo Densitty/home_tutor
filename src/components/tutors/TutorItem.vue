@@ -1,7 +1,7 @@
 <template>
   <li>
     <h3>{{ fullName }}</h3>
-    <h4>${{ rate }} / hour</h4>
+    <h4>{{ tutorPrice }} / hour</h4>
     <div>
       <base-badge :type="area" :title="area" v-for="area in areas" :key="area">
       </base-badge>
@@ -30,6 +30,12 @@ export default {
     },
     tutorLink() {
       return `${this.$route.path}/${this.id}`;
+    },
+    tutorPrice() {
+      return new Intl.NumberFormat("en-NG", {
+        style: "currency",
+        currency: "NGN",
+      }).format(this.rate);
     },
   },
 };
