@@ -3,7 +3,10 @@
 Simple application powered with Vue.js
 
 ## Live View
+<<<<<<< HEAD
 
+=======
+>>>>>>> 21c5950bdfc6c8bd737de93d23f1fc460538c6e1
 https://home-tutors-c608e.web.app/tutors
 
 ## Project setup
