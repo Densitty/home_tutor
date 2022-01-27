@@ -2,6 +2,10 @@
 
 Simple application powered with Vue.js
 
+## Live View
+
+https://home-tutors-c608e.web.app/tutors
+
 ## Project setup
 
 ```
